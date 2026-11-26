@@ -41,7 +41,15 @@ The course BigDataVM (or the same versions on Ubuntu 16.04):
 
 ## Getting the data
 
-1. **GTFS timetable (real).** Download the Dubai RTA feed from the Mobility Database (feed `mdb-3359`, https://mobilitydatabase.org/feeds/mdb-3359) and unzip it into `~/rta_data/gtfs`. The feed is updated from time to time, so a newer version may give slightly different numbers.
+1. **GTFS timetable (real).** The Dubai RTA feed from the Mobility Database (feed `mdb-3359`). The feed is updated from time to time, so a newer version may give slightly different numbers.
+
+```bash
+mkdir -p ~/rta_data/gtfs && cd ~/rta_data/gtfs
+wget https://files.mobilitydatabase.org/mdb-3359/latest.zip
+python3 -m zipfile -e latest.zip .
+cd -
+```
+
 2. **Nol taps (synthetic).** The RTA does not publish raw tap data, so we generate it:
 
 ```bash
