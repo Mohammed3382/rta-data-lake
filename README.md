@@ -20,6 +20,19 @@ B. Road sensor stream
 
 The data lake lives in HDFS under `/datalake`, split into five zones: `landing`, `raw`, `cleansed`, `curated` and `sandbox`.
 
+## Quick start (on the BigDataVM)
+
+Open the BigDataVM in Oracle VirtualBox, open a terminal and run:
+
+```bash
+wget https://github.com/Mohammed3382/rta-data-lake/archive/refs/heads/main.zip
+python3 -m zipfile -e main.zip .
+cd rta-data-lake-main
+bash setup.sh
+```
+
+`setup.sh` downloads the GTFS feed and generates the Nol data. Then run the steps in "Running it" below.
+
 ## Folders
 
 | Folder | What is in it |
@@ -41,6 +54,8 @@ The course BigDataVM (or the same versions on Ubuntu 16.04):
 
 ## Getting the data
 
+`setup.sh` does both of these steps for you.
+
 1. **GTFS timetable (real).** The Dubai RTA feed from the Mobility Database (feed `mdb-3359`). The feed is updated from time to time, so a newer version may give slightly different numbers.
 
 ```bash
@@ -60,10 +75,9 @@ This writes seven files, `nol_taps_20261005.csv` to `nol_taps_20261011.csv`, abo
 
 ## Running it
 
-Copy or clone this folder onto the VM, then run the steps in order:
+Run the steps in order:
 
 ```bash
-chmod +x run/*.sh
 run/00_start_services.sh        # HDFS, YARN, JobHistory, Zeppelin, Hive metastore, HiveServer2
 run/01_load_raw_zone.sh         # create the zones, load Nol and GTFS into the raw zone
 run/02_mapreduce_cleansing.sh   # local test on 3,000 lines, then the full cleansing job
